@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ThermoLoop | از پسماند تا وات</title>
+<meta name="description" content="ترمولوپ؛ تبدیل حرارت اتلافی صنایع به برق با بازیابی انرژی و چرخه رانکین آلی.">
+<meta name="theme-color" content="#04352A">
+<link rel="icon" href="logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="loading">
+
+<!-- Animated intro: English slogan first, then the exact supplied logo, then progress -->
+<div id="loader" aria-hidden="true">
+  <div class="ld-curtain top"></div>
+  <div class="ld-curtain bot"></div>
+  <div class="ld-center">
+    <div class="ld-tagline" aria-label="FROM WASTE TO WATTS">
+      <span class="ld-word-one">FROM</span>
+      <span class="ld-word-two">WASTE</span>
+      <span class="ld-word-three">TO</span>
+      <span class="ld-word-four">WATTS</span>
+    </div>
+    <div class="ld-logo-stage">
+      <img class="ld-logo" src="logo.png" alt="ThermoLoop — From Waste to Watts">
+    </div>
+    <div class="ld-progress-stage">
+      <div class="ld-bar"><span></span></div>
+      <div class="ld-pct"><em id="ldPct">0</em><span>%</span></div>
+    </div>
+  </div>
+</div>
+
+<canvas id="trail" aria-hidden="true"></canvas>
+<div class="cur-ring" aria-hidden="true"><span class="cur-label"></span></div>
+<div class="cur-dot" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<header class="nav" id="top">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="ThermoLoop">
+      <img class="mark" src="logo-mark.png" alt="">
+      <span class="word"><b>THERMO</b><i>LOOP</i></span>
+    </a>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="fa" class="active" aria-pressed="true">فا</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="burger" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="siteMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full-screen menu, opened by the three-line button -->
+<div class="menu-screen" id="siteMenu" aria-hidden="true">
+  <div class="menu-top wrap">
+    <a class="brand menu-brand" href="#top" aria-label="ThermoLoop">
+      <img class="mark" src="logo-mark.png" alt=""><span class="word"><b>THERMO</b><i>LOOP</i></span>
+    </a>
+    <button class="menu-close" type="button" aria-label="بستن منو"><span></span><span></span></button>
+  </div>
+  <div class="menu-content wrap">
+    <div class="menu-intro">
+      <span class="menu-kicker" data-i18n="menu.kicker">راهنمای سایت / MENU</span>
+      <h2 data-i18n-html="menu.title">از گرما،<br>انرژی بسازیم.</h2>
+      <p data-i18n="menu.description">بخش موردنظرتان را انتخاب کنید و با ترمولوپ بیشتر آشنا شوید.</p>
+    </div>
+    <nav class="menu-links" aria-label="Main menu">
+      <a href="#problem"><span class="menu-num">01</span><span data-i18n="nav.problem">چالش</span><em>↗</em></a>
+      <a href="#orc"><span class="menu-num">02</span><span data-i18n="nav.orc">انیمیشن رانکین</span><em>↗</em></a>
+      <a href="#apps"><span class="menu-num">03</span><span data-i18n="nav.apps">کاربردها</span><em>↗</em></a>
+      <a href="#why"><span class="menu-num">04</span><span data-i18n="nav.why">مزایا</span><em>↗</em></a>
+      <a href="#values"><span class="menu-num">05</span><span data-i18n="nav.values">ارزش‌های ما</span><em>↗</em></a>
+      <a href="#contact"><span class="menu-num">06</span><span data-i18n="nav.contact">تماس با ما</span><em>↗</em></a>
+    </nav>
+    <div class="menu-bottom">
+      <span data-i18n="menu.language">زبان / LANGUAGE</span>
+      <div class="lang-toggle menu-langs" role="group" aria-label="Language">
+        <button type="button" data-lang="fa" class="active" aria-pressed="true">فارسی</button>
+        <button type="button" data-lang="en" aria-pressed="false">English</button>
+      </div>
+      <span class="menu-slogan">FROM WASTE TO WATTS</span>
+    </div>
+  </div>
+  <div class="menu-orb orb-one"></div><div class="menu-orb orb-two"></div>
+</div>
+
+<main>
+<section class="hero">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="grid-bg"></div>
+  <div class="wrap hero-in">
+    <div class="hero-text">
+      <span class="chip reveal" data-i18n="hero.eyebrow">FROM WASTE TO WATTS</span>
+      <h1 class="reveal" data-i18n-html="hero.title">حرارتی که دور ریخته می‌شد،<br><em>حالا برق تولید می‌کند</em></h1>
+      <p class="reveal" data-i18n="hero.description">ترمولوپ به صنایع کمک می‌کند حرارت اتلافی را به انرژی الکتریکی تبدیل کنند؛ برای استفاده بهتر از انرژی موجود، کاهش هزینه‌ها و حرکت به‌سوی تولید پایدارتر.</p>
+      <div class="hero-points reveal">
+        <span><i>↗</i><b data-i18n="hero.point1">بازیابی انرژی</b></span>
+        <span><i>✳</i><b data-i18n="hero.point2">بدون سوخت اضافه</b></span>
+      </div>
+      <div class="cta reveal">
+        <a class="btn magnet" href="#contact" data-i18n="hero.primary">تماس با ترمولوپ</a>
+        <a class="btn ghost magnet" href="#orc" data-i18n="hero.secondary">دیدن انیمیشن</a>
+      </div>
+    </div>
+    <div class="hero-art reveal">
+      <div class="art-glow"></div>
+      <div class="art-halo"></div>
+      <img class="big-mark" id="tilt" src="logo-mark.png" alt="ThermoLoop logo">
+      <span class="orbit o1"></span><span class="orbit o2"></span>
+      <div class="art-label label-top"><span class="pulse-dot"></span><span data-i18n="hero.art1">حرارت اتلافی</span></div>
+      <div class="art-label label-bottom"><span class="pulse-dot"></span><span data-i18n="hero.art2">انرژی مفید</span></div>
+    </div>
+  </div>
+  <a class="scroll-hint" href="#problem" aria-label="Scroll"><span></span></a>
+</section>
+
+<section class="stats">
+  <div class="wrap grid4">
+    <div class="stat reveal"><strong data-count="80" data-suffix="°C+">۰</strong><span data-i18n="stats.one">دمای ورودی قابل بررسی</span></div>
+    <div class="stat reveal"><strong data-count="350" data-suffix="°C">۰</strong><span data-i18n="stats.two">بازه دمایی نمونه منابع حرارتی</span></div>
+    <div class="stat reveal"><strong data-count="20" data-suffix="%">۰</strong><span data-i18n="stats.three">بازده الکتریکی تقریبی در شرایط مناسب</span></div>
+    <div class="stat reveal"><strong data-count="0" data-suffix="">۰</strong><span data-i18n="stats.four">نیاز به سوخت اضافه در بازیابی حرارت</span></div>
+  </div>
+  <p class="note wrap" data-i18n="stats.note">اعداد، بازه‌های نمونه و وابسته به شرایط پروژه‌اند؛ برآورد دقیق به ارزیابی فنی نیاز دارد.</p>
+</section>
+
+<section id="problem" class="sec problem-sec">
+  <div class="wrap two">
+    <div class="reveal">
+      <span class="eyebrow" data-i18n="problem.eyebrow">فرصت پنهان</span>
+      <h2 data-i18n="problem.title">انرژی‌ای که هنوز می‌تواند کار کند</h2>
+      <p data-i18n="problem.body">در بسیاری از فرایندهای صنعتی، بخشی از انرژی به شکل گرما از دودکش‌ها، کمپرسورها، موتورها و تجهیزات فرایندی خارج می‌شود. بازیابی این گرما می‌تواند بخشی از انرژی هدررفته را به برق مفید تبدیل کند.</p>
+    </div>
+    <ul class="ticks reveal">
+      <li data-i18n="problem.bullet1">کاهش اتلاف و استفاده بهتر از انرژی موجود</li>
+      <li data-i18n="problem.bullet2">فرصتی برای کاهش هزینه‌های برق</li>
+      <li data-i18n="problem.bullet3">کمک به کاهش اثرات زیست‌محیطی فرایند</li>
+    </ul>
+  </div>
+</section>
+
+<section id="orc" class="sec dark orc-sec">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow light" data-i18n="orc.eyebrow">بازیابی انرژی</span>
+      <h2 data-i18n="orc.title">چرخه رانکین آلی (ORC)</h2>
+      <p class="lead" data-i18n="orc.body">حرارت وارد چرخه می‌شود، سیال به گردش درمی‌آید و ژنراتور برق تولید می‌کند. انیمیشن زیر ایده اصلی را در یک نگاه نشان می‌دهد.</p>
+    </div>
+    <div class="diagram reveal">
+      <div class="diagram-topline"><span data-i18n="orc.diagramLabel">نمای ساده چرخه انرژی</span><span class="live-indicator"><i></i><span data-i18n="orc.live">در حال گردش</span></span></div>
+      <svg viewBox="0 0 800 380" role="img" aria-label="ORC animated cycle diagram" data-i18n-attr="aria-label:orc.diagramAlt">
+        <defs>
+          <linearGradient id="hot" x1="0" x2="1"><stop offset="0" stop-color="#E8450A"/><stop offset="1" stop-color="#FF8000"/></linearGradient>
+          <linearGradient id="cold" x1="0" x2="1"><stop offset="0" stop-color="#2E8B57"/><stop offset="1" stop-color="#6ccf9a"/></linearGradient>
+        </defs>
+        <path class="flow" d="M200 90 H600 V290 H200 Z" fill="none" stroke="#ffffff55" stroke-width="3" stroke-dasharray="10 10"/>
+        <rect x="120" y="50" width="160" height="80" rx="16" fill="url(#hot)"/>
+        <text x="200" y="85" class="t" data-i18n="orc.evaporator">اواپراتور</text><text x="200" y="108" class="s" data-i18n="orc.heat">ورود حرارت</text>
+        <rect x="520" y="50" width="160" height="80" rx="16" fill="#fff"/>
+        <text x="600" y="85" class="t dk" data-i18n="orc.turbine">توربین و ژنراتور</text><text x="600" y="108" class="s dk" data-i18n="orc.power">تولید برق</text>
+        <rect x="520" y="250" width="160" height="80" rx="16" fill="url(#cold)"/>
+        <text x="600" y="285" class="t" data-i18n="orc.condenser">کندانسور</text><text x="600" y="308" class="s" data-i18n="orc.cool">دفع گرما</text>
+        <rect x="120" y="250" width="160" height="80" rx="16" fill="#0a4d3b" stroke="#2E8B57" stroke-width="2"/>
+        <text x="200" y="285" class="t" data-i18n="orc.pump">پمپ</text><text x="200" y="308" class="s" data-i18n="orc.return">بازگشت سیال</text>
+        <circle r="8" fill="#FF8000"><animateMotion dur="7s" repeatCount="indefinite" path="M200 90 H600 V290 H200 Z"/></circle>
+        <circle r="6" fill="#86e3b3"><animateMotion dur="7s" begin="-3.5s" repeatCount="indefinite" path="M200 90 H600 V290 H200 Z"/></circle>
+        <circle r="3" fill="#fff"><animateMotion dur="7s" begin="-5s" repeatCount="indefinite" path="M200 90 H600 V290 H200 Z"/></circle>
+        <text x="400" y="190" class="c" data-i18n="orc.fluid">سیال در گردش</text>
+      </svg>
+    </div>
+    <p class="orc-footnote reveal" data-i18n="orc.note">طراحی و عملکرد هر سامانه با توجه به منبع حرارتی و شرایط محل تعیین می‌شود.</p>
+  </div>
+</section>
+
+<section id="apps" class="sec apps-sec">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow" data-i18n="apps.eyebrow">کاربردها</span>
+      <h2 data-i18n="apps.title">هر جا گرمای اضافه هست، یک فرصت وجود دارد</h2>
+    </div>
+    <div class="grid3">
+      <article class="card reveal tilt-card"><div class="ic">🏭</div><h3 data-i18n="apps.card1.title">صنایع سنگین</h3><p data-i18n="apps.card1.body">سیمان، فولاد، شیشه و پتروشیمی</p></article>
+      <article class="card reveal tilt-card"><div class="ic">⚙️</div><h3 data-i18n="apps.card2.title">موتورها و توربین‌ها</h3><p data-i18n="apps.card2.body">بازیابی حرارت خروجی موتور و توربین گازی</p></article>
+      <article class="card reveal tilt-card"><div class="ic">🌋</div><h3 data-i18n="apps.card3.title">زمین‌گرمایی</h3><p data-i18n="apps.card3.body">استفاده از منابع زمین‌گرمایی کم‌دما و میان‌دما</p></article>
+      <article class="card reveal tilt-card"><div class="ic">☀️</div><h3 data-i18n="apps.card4.title">خورشیدی حرارتی</h3><p data-i18n="apps.card4.body">ترکیب با سامانه‌های جمع‌آوری گرمای خورشید</p></article>
+      <article class="card reveal tilt-card"><div class="ic">🌿</div><h3 data-i18n="apps.card5.title">زیست‌توده و پسماند</h3><p data-i18n="apps.card5.body">بهره‌برداری از گرمای فرایندهای تبدیل پسماند</p></article>
+      <article class="card reveal tilt-card"><div class="ic">🚢</div><h3 data-i18n="apps.card6.title">دریایی و حمل‌ونقل</h3><p data-i18n="apps.card6.body">استفاده دوباره از حرارت موتورهای بزرگ</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="sec soft why-sec">
+  <div class="wrap two">
+    <div class="reveal">
+      <span class="eyebrow" data-i18n="why.eyebrow">چرا ترمولوپ؟</span>
+      <h2 data-i18n="why.title">حرارت کمتر هدر برود؛ ارزش بیشتری بسازیم</h2>
+      <p data-i18n="why.body">رویکرد ترمولوپ بر ارزیابی منبع حرارتی و یافتن مسیر عملی برای بازیابی انرژی متمرکز است؛ راهکاری که متناسب با واقعیت هر سایت صنعتی بررسی می‌شود.</p>
+    </div>
+    <div class="why reveal">
+      <div><b>♻️</b><span data-i18n="why.item1">استفاده بهتر از انرژی موجود</span></div>
+      <div><b>↘</b><span data-i18n="why.item2">کمک به کاهش هزینه انرژی</span></div>
+      <div><b>⚙️</b><span data-i18n="why.item3">راهکار متناسب با شرایط سایت</span></div>
+      <div><b>🌍</b><span data-i18n="why.item4">پشتیبانی از اهداف پایداری</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="values" class="sec values-sec">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow" data-i18n="values.eyebrow">ارزش‌های ما</span>
+      <h2 data-i18n="values.title">آنچه مسیر ما را مشخص می‌کند</h2>
+    </div>
+    <div class="values-grid">
+      <article class="card value-card value-vision reveal tilt-card">
+        <div class="ic">🔭</div>
+        <span class="value-tag" data-i18n="values.visionTag">VISION</span>
+        <h3 data-i18n="values.visionTitle">چشم‌انداز</h3>
+        <p data-i18n="values.visionBody">آینده‌ای که در آن هیچ حرارتی بی‌دلیل هدر نمی‌رود و هر صنعت می‌تواند بخشی از انرژی موردنیازش را از گرمای خودش تأمین کند.</p>
+      </article>
+      <article class="card value-card value-mission reveal tilt-card">
+        <div class="ic">🎯</div>
+        <span class="value-tag" data-i18n="values.missionTag">MISSION</span>
+        <h3 data-i18n="values.missionTitle">مأموریت</h3>
+        <p data-i18n="values.missionBody">ما با فناوری چرخه رانکین آلی، حرارت اتلافی صنایع را شناسایی و به برق مفید تبدیل می‌کنیم تا هزینه انرژی کاهش یابد و تولید پایدارتر شود.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="sec cta-sec">
+  <div class="contact-orb"></div>
+  <div class="wrap contact-layout">
+    <div class="contact-copy reveal">
+      <span class="eyebrow light" data-i18n="contact.eyebrow">ارتباط</span>
+      <h2 data-i18n="contact.title">بیایید از گرمای هدررفته، ارزش بسازیم.</h2>
+      <p class="lead" data-i18n="contact.body">برای گفت‌وگو درباره فرصت‌های بازیابی حرارت در مجموعه‌تان، از راه ایمیل با ما در ارتباط باشید.</p>
+    </div>
+    <div class="contact-cards">
+      <div class="contact-action reveal">
+        <span class="contact-index">THERMOLOOP / CONTACT</span>
+        <p class="materials-note" data-i18n="contact.emailNote">برای ارتباط مستقیم از طریق ایمیل</p>
+        <button class="btn contact-btn magnet" id="emailReveal" type="button" aria-expanded="false" aria-controls="emailCard"><span data-i18n="contact.button">تماس با ما</span><span class="btn-arrow">↗</span></button>
+        <div class="email-card" id="emailCard" hidden>
+          <span data-i18n="contact.emailLabel">ایمیل شرکت</span>
+          <a id="companyEmail" href="mailto:thermolooop@gmail.com">thermolooop@gmail.com</a>
+          <button id="copyEmail" class="copy-email" type="button" data-i18n="contact.copy">کپی ایمیل</button>
+        </div>
+      </div>
+      <div class="contact-action reveal">
+        <span class="contact-index">THERMOLOOP / RESOURCES</span>
+        <p class="materials-note" data-i18n="contact.materialsNote">دسترسی سریع به فایل‌ها و مطالب ترمولوپ</p>
+        <a class="btn contact-btn magnet" id="materialsLink" href="https://abrehamrahi.ir/drive/publicFolder?h=A52LYBavYFsysd2nA2w_qQ" target="_blank" rel="noopener noreferrer"><span data-i18n="contact.materialsButton">دسترسی به مطالب</span><span class="btn-arrow">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <a class="brand-sm" href="#top"><img src="logo-mark.png" alt=""><span class="word sm"><b>THERMO</b><i>LOOP</i></span></a>
+    <span class="foot-tag">FROM WASTE TO WATTS</span>
+    <span class="copyright">© <span id="yr"></span> ThermoLoop</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
