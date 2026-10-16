@@ -6,7 +6,7 @@ const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 // Update this single value to the company's verified, public email before launch.
-const COMPANY_EMAIL = 'thermolooop@gmail.com';
+const COMPANY_EMAIL = 'thermoloop.co@gmail.com';
 
 const copy = {
   fa: {
