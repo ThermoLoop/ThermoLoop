@@ -6,7 +6,7 @@ const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 // Update this single value to the company's verified, public email before launch.
-const COMPANY_EMAIL = 'thermoloop.co@gmail.com';
+const COMPANY_EMAIL = 'thermolooop@gmail.com';
 
 const copy = {
   fa: {
@@ -250,66 +250,8 @@ copyEmail.addEventListener('click', async () => {
   }
 });
 
-/* ========== Cursor trail and subtle hover effects ========== */
+/* ========== Subtle hover effects ========== */
 if (fine && !reduced) {
-  root.classList.add('has-cursor');
-  const dot = document.querySelector('.cur-dot');
-  const ring = document.querySelector('.cur-ring');
-  const label = document.querySelector('.cur-label');
-  const canvas = document.getElementById('trail');
-  const ctx = canvas.getContext('2d');
-  let W, H, dpr;
-  const resize = () => {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = canvas.width = window.innerWidth * dpr;
-    H = canvas.height = window.innerHeight * dpr;
-    canvas.style.width = window.innerWidth + 'px';
-    canvas.style.height = window.innerHeight + 'px';
-  };
-  resize(); window.addEventListener('resize', resize);
-  let mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my;
-  const pts = [];
-  window.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    root.classList.add('cur-on');
-    pts.push({ x: mx, y: my, life: 1 });
-    if (pts.length > 36) pts.shift();
-  });
-  document.addEventListener('mouseleave', () => root.classList.remove('cur-on'));
-  document.addEventListener('mouseenter', () => root.classList.add('cur-on'));
-  window.addEventListener('mousedown', () => root.classList.add('cur-down'));
-  window.addEventListener('mouseup', () => root.classList.remove('cur-down'));
-  const setState = target => {
-    if (!(target instanceof Element)) return;
-    const link = target.closest('a, button, [data-cur], .card, .stat');
-    const text = target.closest('input, textarea');
-    root.classList.toggle('cur-link', !!link && !text);
-    root.classList.toggle('cur-text', !!text);
-    const textLabel = link && link.dataset.cur;
-    label.textContent = textLabel || '';
-    root.classList.toggle('cur-label', !!textLabel);
-    root.classList.toggle('cur-dark', !!target.closest('.dark, .cta-sec, .foot, .menu-screen, .value-vision'));
-  };
-  document.addEventListener('mouseover', e => setState(e.target));
-  const loop = () => {
-    rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16;
-    dot.style.transform = `translate(${mx}px,${my}px)`;
-    ring.style.transform = `translate(${rx}px,${ry}px)`;
-    ctx.clearRect(0, 0, W, H);
-    ctx.save(); ctx.scale(dpr, dpr);
-    for (let i = 0; i < pts.length; i++) {
-      const p = pts[i]; p.life -= 0.04;
-      if (p.life <= 0) { pts.splice(i--, 1); continue; }
-      const r = 1 + p.life * 4.5;
-      const c = p.life > 0.5 ? '255,128,0' : '46,139,87';
-      ctx.fillStyle = `rgba(${c},${p.life * 0.48})`;
-      ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fill();
-    }
-    ctx.restore();
-    requestAnimationFrame(loop);
-  };
-  requestAnimationFrame(loop);
-
   document.querySelectorAll('.magnet').forEach(btn => {
     btn.addEventListener('mousemove', e => {
       const r = btn.getBoundingClientRect();
